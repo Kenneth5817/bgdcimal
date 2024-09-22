@@ -1,22 +1,19 @@
 package org.iesvdm.ejercicios;
 import java.math.BigDecimal;
-import java.util.Scanner;
+import java.math.RoundingMode;
 
 public class ej2 {
     public static void main(String[] args) {
-        BigDecimal c= new BigDecimal("6");
-        BigDecimal p= new BigDecimal("1");
-        BigDecimal r= new BigDecimal("5");
-        BigDecimal n= new BigDecimal("2");
+        BigDecimal p= new BigDecimal("10");
+        BigDecimal r= new BigDecimal("0.05");
+        int n= 2;
         /**n = años, p=monto principal, r=tasa de interés anual, c= cantidad final depositada**/
 
         /** Fórmula c=p(1+r);**/
-        BigDecimal formula= new BigDecimal("0.1");
-        formula=p(1+r)^n;
+        BigDecimal suma= BigDecimal.ONE.add(r);
+        BigDecimal c=p.multiply(suma.pow(n));
+        c.setScale(10, RoundingMode.HALF_EVEN);
 
-        c=c.add(p);
-        c=c.add(r);
-        System.out.println("Años: "+n);
-        System.out.println("Cantidad final: "+formula);
+        System.out.println("RESULTADO: "+c);
     }
 }

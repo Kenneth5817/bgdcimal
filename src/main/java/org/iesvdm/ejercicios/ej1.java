@@ -8,7 +8,7 @@ public class ej1 {
 
     public static void main(String[] args) {
         BigInteger n = new BigInteger("5");
-        BigInteger acumulador = BigInteger.ONE; /**Va uno a uno en vez de poner new BIgInteger("5")**/
+        BigInteger acumulador = BigInteger.ONE; /**Va uno a uno en vez de poner new BigInteger("5")**/
 
         while(n.compareTo(BigInteger.ZERO) > 0){
             /**NO USAR ++ Usar n. clase**/
