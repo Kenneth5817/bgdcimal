@@ -3,6 +3,8 @@ package org.iesvdm.ejercicios;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.net.StandardSocketOptions;
+import java.util.Scanner;
 
 public class ej3 {
     public static void main(String[] args) {
@@ -14,31 +16,33 @@ public class ej3 {
         // Pasamos la tasa de interés anual a tasa mensual
         BigDecimal tasaInteresXMes = tasaInteresAnual.divide(new BigDecimal("12"), 10, RoundingMode.HALF_EVEN);
 
-        // Calculamos el pago mensual (PMT)
+        // Calculamos el pago mensual (PMT) con la fórmula
         BigDecimal pmt = calcularPagoMensual(principal, tasaInteresXMes, totalPagos);
 
         BigDecimal saldoPendiente = principal;
 
         // Mostramos el pago mensual (PMT)
-        System.out.println("Pago mensual (PMT): " + pmt);
+        System.out.println("Préstamo: "+ saldoPendiente+"€");
+        System.out.println("Tasa de interés anual: "+tasaInteresAnual+"%");
+        System.out.println("Pago mensual (PMT): " + pmt +"€");
         System.out.println("Esquema de amortización:");
-        System.out.printf( "Mes", "Pago Interés", "Pago Principal", "Pago Total", "Saldo Pendiente");
+        System.out.println("------------------------");
+        System.out.println( "Mes\tPago\tPrincipal\t Interés\tBalance");
 
         // Bucle para calcular los pagos mes a mes
         for (int mes = 1; mes <= totalPagos; mes++) {
-            // Calcular el pago de interés para el mes
+            // Calculamos el pago de interés para el mes
             BigDecimal interesMes = saldoPendiente.multiply(tasaInteresXMes).setScale(10, RoundingMode.HALF_EVEN);
 
-            // Calcular el pago de principal
+            // Calculamos el pago de principal
             BigDecimal pagoPrincipal = pmt.subtract(interesMes).setScale(10, RoundingMode.HALF_EVEN);
 
-            // Reducir el saldo pendiente
+            // Reducimos el saldo pendiente
             saldoPendiente = saldoPendiente.subtract(pagoPrincipal).setScale(10, RoundingMode.HALF_EVEN);
 
-            // Imprimir los detalles del mes
-            System.out.printf("RESULTADO: "+mes, interesMes, pagoPrincipal, pmt, saldoPendiente);
+            System.out.printf("Resultado: "+mes, pagoPrincipal, principal, interesMes, saldoPendiente);
 
-            // Si el saldo pendiente llega a cero o es negativo, salir del bucle
+            // Si el saldo pendiente llega a cero o es negativo, se saldrá del bucle
             if (saldoPendiente.compareTo(BigDecimal.ZERO) <= 0) {
                 saldoPendiente = BigDecimal.ZERO;
                 break;
@@ -46,14 +50,14 @@ public class ej3 {
         }
     }
 
-    // Método para calcular el pago mensual (PMT)
+    // Método para calcular el pago mes a mes (PMT)
     public static BigDecimal calcularPagoMensual(BigDecimal principal, BigDecimal tasaInteresMensual, int totalPagos) {
-        BigDecimal unoMasR = BigDecimal.ONE.add(tasaInteresMensual); // (1 + r)
-        BigDecimal unoMasR_a_la_n = unoMasR.pow(totalPagos, MathContext.DECIMAL64); // (1 + r)^n
+        BigDecimal unoMasR = BigDecimal.ONE.add(tasaInteresMensual);
+        BigDecimal unoMasR_a_la_n = unoMasR.pow(totalPagos);
         BigDecimal numerador = principal.multiply(tasaInteresMensual).multiply(unoMasR_a_la_n); // P * r * (1 + r)^n
-        BigDecimal denominador = unoMasR_a_la_n.subtract(BigDecimal.ONE); // (1 + r)^n - 1
+        BigDecimal denominador = unoMasR_a_la_n.subtract(BigDecimal.ONE); //(1 + r)^n - 1
 
-        // Calcular PMT
+        // Calculamos PMT
         return numerador.divide(denominador, 10, RoundingMode.HALF_EVEN);
     }
 }
