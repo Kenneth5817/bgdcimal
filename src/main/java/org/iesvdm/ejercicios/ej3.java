@@ -6,20 +6,20 @@ import java.math.RoundingMode;
 
 public class ej3 {
     public static void main(String[] args) {
-        int años = 30; // Duración del préstamo en años
-        int totalPagos = años * 12; // Total de pagos (30 años * 12 meses)
+        int años = 30;
+        int totalPagos = años * 12;
         BigDecimal principal = new BigDecimal("20000"); // Monto del préstamo
         BigDecimal tasaInteresAnual = new BigDecimal("0.05"); // Tasa de interés anual del 5%
 
-        // Convertir la tasa de interés anual a tasa mensual
+        // Pasamos la tasa de interés anual a tasa mensual
         BigDecimal tasaInteresXMes = tasaInteresAnual.divide(new BigDecimal("12"), 10, RoundingMode.HALF_EVEN);
 
-        // Calcular el pago mensual (PMT)
+        // Calculamos el pago mensual (PMT)
         BigDecimal pmt = calcularPagoMensual(principal, tasaInteresXMes, totalPagos);
 
         BigDecimal saldoPendiente = principal;
 
-        // Mostrar el pago mensual (PMT)
+        // Mostramos el pago mensual (PMT)
         System.out.println("Pago mensual (PMT): " + pmt);
         System.out.println("Esquema de amortización:");
         System.out.printf( "Mes", "Pago Interés", "Pago Principal", "Pago Total", "Saldo Pendiente");
@@ -36,7 +36,7 @@ public class ej3 {
             saldoPendiente = saldoPendiente.subtract(pagoPrincipal).setScale(10, RoundingMode.HALF_EVEN);
 
             // Imprimir los detalles del mes
-            System.out.printf("mes, interesMes, pagoPrincipal, pmt, saldoPendiente");
+            System.out.printf("RESULTADO: "+mes, interesMes, pagoPrincipal, pmt, saldoPendiente);
 
             // Si el saldo pendiente llega a cero o es negativo, salir del bucle
             if (saldoPendiente.compareTo(BigDecimal.ZERO) <= 0) {

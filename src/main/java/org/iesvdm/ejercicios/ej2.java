@@ -14,6 +14,6 @@ public class ej2 {
         BigDecimal c=p.multiply(suma.pow(n));
         c.setScale(10, RoundingMode.HALF_EVEN);
 
-        System.out.println("RESULTADO: "+c);
+        System.out.println("RESULTADO: "+c.setScale(2,RoundingMode.HALF_UP));
     }
 }
