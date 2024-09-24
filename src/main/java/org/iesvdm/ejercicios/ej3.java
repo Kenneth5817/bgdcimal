@@ -8,7 +8,7 @@ public class ej3 {
     public static void main(String[] args) {
         int años = 30; // Duración del préstamo en años
         int totalPagos = años * 12; // Total de pagos (30 años * 12 meses)
-        BigDecimal principal = new BigDecimal("20000"); // Monto del préstamo
+        BigDecimal principal = new BigDecimal("200000"); // Monto del préstamo
         BigDecimal tasaInteresAnual = new BigDecimal("0.05"); // Tasa de interés anual del 5%
 
         // Convertir la tasa de interés anual a tasa mensual
