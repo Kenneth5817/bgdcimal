@@ -9,12 +9,12 @@ public class ej3 {
         int años = 30; // Duración del préstamo en años
         int totalPagos = años * 12; // Total de pagos (30 años * 12 meses)
         BigDecimal principal = new BigDecimal("200000"); // Monto del préstamo
-        BigDecimal tasaInteresAnual = new BigDecimal("0.05"); // Tasa de interés anual del 5%
+        BigDecimal tasaAnual = new BigDecimal("0.05"); // Tasa de interés anual del 5%
 
-        // Convertir la tasa de interés anual a tasa mensual
-        BigDecimal tasaInteresXMes = tasaInteresAnual.divide(new BigDecimal("12"), 10, RoundingMode.HALF_EVEN);
+        // Convertimos la tasa de interés anual a tasa mensual
+        BigDecimal tasaInteresXMes = tasaAnual.divide(new BigDecimal("12"), 10, RoundingMode.HALF_EVEN);
 
-        // Calcular el pago mensual (PMT)
+        // Calculamos el pago mensual (PMT)
         BigDecimal pmt = calcularPagoMensual(principal, tasaInteresXMes, totalPagos);
 
         BigDecimal saldoPendiente = principal;
@@ -33,7 +33,7 @@ public class ej3 {
             BigDecimal pagoPrincipal = pmt.subtract(interesMes).setScale(10, RoundingMode.HALF_EVEN);
 
             // Reducir el saldo pendiente
-            saldoPendiente = saldoPendiente.subtract(pagoPrincipal).setScale(10, RoundingMode.HALF_EVEN);
+            BigDecimal nuevoSaldo = saldoPendiente.subtract(pagoPrincipal).setScale(10, RoundingMode.HALF_EVEN);
 
             // Imprimir los detalles del mes
             System.out.printf("mes, interesMes, pagoPrincipal, pmt, saldoPendiente");
