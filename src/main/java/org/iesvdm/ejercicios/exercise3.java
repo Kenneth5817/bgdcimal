@@ -11,7 +11,5 @@ public class exercise3 {
         BigDecimal tasaINtAnual=new BigDecimal("0.05");
 
         BigDecimal tasaINtXMes= tasaINtAnual.divide(new BigDecimal("12"), 10, RoundingMode.HALF_EVEN);
-
-
     }
 }
